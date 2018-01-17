@@ -328,8 +328,6 @@ contract GoldFingerCon {
   }
 
   // Anyone can submit blocks to be stored in this contract
-  // Our implementation DOES NOT CONSIDER FORKS - only illustrates storage costs.
-  // Possible to incorporate BTCRelay code to handle forks.
   function submitBlock(bytes blockheader) returns (bool) {
 
     bytes32 blockhash = btc.flip32(sha256(sha256(blockheader))); // Hash of Block
@@ -338,7 +336,7 @@ contract GoldFingerCon {
     BlockHeader memory head = BlockHeader(0,0,0,0,0,0,0,blockhash); // Empty block header
     parseHeaderFields(head, blockheader); // Parse block header (fill BlockHeader Struct)
 
-    // TODO: Check PoW here!
+    // TODO: Check PoW here! 
 
     // Store block!
     blockHeaders[blockhash] = head;
